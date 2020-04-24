@@ -16,6 +16,7 @@ namespace TrafficPolice.Models
             try
             {
                 StreamWriter writer = new StreamWriter(fileLocation, true);
+                Console.WriteLine("Saving results....");
 
                 Events.ForEach(e =>
                 {
@@ -23,9 +24,9 @@ namespace TrafficPolice.Models
                     {
                         writer.WriteLine(e.PrintOutQueryInfo());
                     }
-                    catch (Exception err)
+                    catch (Exception exc)
                     {
-                        Console.WriteLine(err.Message);
+                        Console.WriteLine(exc.Message);
                         throw;
                     }
                 });

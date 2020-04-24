@@ -16,6 +16,7 @@ namespace TrafficPolice.Models
     class Police
     {
         public IList<LivePacketDevice> Devices { get; set; } = LivePacketDevice.AllLocalMachine;
+
         QueryRepository repo = new QueryRepository();
 
         public string FileLocation { get; set; }
@@ -124,7 +125,6 @@ namespace TrafficPolice.Models
                     }
                 } while (!Console.KeyAvailable);
 
-                Console.WriteLine("Saving results....");
                 repo.SaveMonitoringResultToTextFile(FileLocation);
                 
             }
