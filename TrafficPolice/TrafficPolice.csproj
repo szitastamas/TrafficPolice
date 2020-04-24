@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\IOHelper.cs" />
     <Compile Include="Models\NetworkEvent.cs" />
     <Compile Include="Models\Police.cs" />
     <Compile Include="Models\Query.cs" />

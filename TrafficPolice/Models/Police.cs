@@ -18,6 +18,20 @@ namespace TrafficPolice.Models
         public IList<LivePacketDevice> Devices { get; set; } = LivePacketDevice.AllLocalMachine;
         QueryRepository repo = new QueryRepository();
 
+        public string FileLocation { get; set; }
+
+        public Police(string location)
+        {
+            if (string.IsNullOrWhiteSpace(location))
+            {
+                FileLocation = @"C:\\DNS_Protocol.txt";
+            }
+            else
+            {
+                FileLocation = location;
+            };
+        }
+
         public void ChooseDevice()
         {
             int deviceCounter = 1;
@@ -111,7 +125,7 @@ namespace TrafficPolice.Models
                 } while (!Console.KeyAvailable);
 
                 Console.WriteLine("Saving results....");
-                repo.SaveMonitoringResultToTextFile();
+                repo.SaveMonitoringResultToTextFile(FileLocation);
                 
             }
         }

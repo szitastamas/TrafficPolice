@@ -16,7 +16,21 @@ namespace TrafficPolice
     {
         static void Main(string[] args)
         {
-            Police police = new Police();
+            Console.WriteLine("Welcome to the Traffic Police application!");
+            Console.WriteLine(@"Type in a location to save the result of the monitoring. The default location is C:\\Protocol.txt");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Note: saving the protocol file here requires administrator rights.");
+            Console.ForegroundColor = ConsoleColor.White;
+            string location = "Invalid Location";
+
+            do
+            {
+                Console.Write("Type in the desired location: ");
+                location = Console.ReadLine();
+
+            } while (IOHelper.IsLocationValid(location) == false);
+
+            Police police = new Police(location);
             police.ChooseDevice();
 
             Console.ReadKey();
