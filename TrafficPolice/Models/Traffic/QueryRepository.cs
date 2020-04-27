@@ -8,6 +8,9 @@ using TrafficPolice.Models.Helpers;
 
 namespace TrafficPolice.Models
 {
+    /// <summary>
+    /// A centralized store for all the DNS Queries and Responses that occured. Its method saves the event infos into the file that has been provided by the user.
+    /// </summary>
     class QueryRepository
     {
        public List<NetworkEvent> Events { get; set; } = new List<NetworkEvent>();
@@ -32,7 +35,7 @@ namespace TrafficPolice.Models
                     }
                 });
 
-                MessageHelper.PrintMessage("Results successfully saved", "success");
+                MessageHelper.PrintMessage("Results successfully saved", "sucecss");
                 MessageHelper.PrintMessage("Press a key to close the program");
                 Console.ReadKey();
             }

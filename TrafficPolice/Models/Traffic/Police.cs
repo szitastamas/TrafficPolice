@@ -133,7 +133,6 @@ namespace TrafficPolice.Models
 
             IpV4Datagram ip = packet.Ethernet.IpV4;
             DnsDatagram dns = ip.Udp.Dns;
-            UdpDatagram udp = ip.Udp;
             IEnumerable<DnsResourceRecord> queries = packet.Ethernet.IpV4.Udp.Dns.ResourceRecords;
 
             if (queries != null || queries.ToList().Count > 0)

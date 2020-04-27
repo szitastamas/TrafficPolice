@@ -25,6 +25,10 @@ namespace TrafficPolice.Models
             Queries = queries;
         }
 
+        /// <summary>
+        /// This overrideable method creates the string that will be displayed in the console during the monitoring phase and it will be saved in the protocol text file.
+        /// </summary>
+        /// <returns>String</returns>
         public virtual string PrintOutQueryInfo()
         {
             string displayMessage = "";
