@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using TrafficPolice.Models.Helpers;
 
 namespace TrafficPolice.Models
 {
@@ -21,7 +22,7 @@ namespace TrafficPolice.Models
 
             if (firstIndexOfSlash == -1)
             {
-                DisplayErrorMessage("Please insert a valid location.");
+                MessageHelper.PrintMessage("Please insert a valid location.", "danger");
                 return false;
             }
 
@@ -29,13 +30,13 @@ namespace TrafficPolice.Models
 
             if (drive.IsReady == false)
             {
-                DisplayErrorMessage("Drive is not available. Please choose another one.");
+                MessageHelper.PrintMessage("Drive is not available. Please choose another one.", "danger");
                 return false;
             }
 
             if(file.Extension != ".txt")
             {
-                DisplayErrorMessage("File extension is invalid. It must be .txt - Please try again.");
+                MessageHelper.PrintMessage("File extension is invalid. It must be .txt - Please try again.", "danger");
                 return false;
             }
 
@@ -45,13 +46,6 @@ namespace TrafficPolice.Models
             }
 
             return true;
-        }
-
-        private static void DisplayErrorMessage(string msg)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(msg);
-            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }

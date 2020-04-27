@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrafficPolice.Models.Helpers;
 
 namespace TrafficPolice.Models
 {
@@ -16,7 +17,7 @@ namespace TrafficPolice.Models
             try
             {
                 StreamWriter writer = new StreamWriter(fileLocation, true);
-                Console.WriteLine("Saving results....");
+                MessageHelper.PrintMessage("Saving results....");
 
                 Events.ForEach(e =>
                 {
@@ -26,27 +27,24 @@ namespace TrafficPolice.Models
                     }
                     catch (Exception exc)
                     {
-                        Console.WriteLine(exc.Message);
+                        MessageHelper.PrintMessage(exc.Message, "danger");
                         throw;
                     }
                 });
 
-                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.WriteLine("Results successfully saved");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Press a key to close the program");
+                MessageHelper.PrintMessage("Results successfully saved", "success");
+                MessageHelper.PrintMessage("Press a key to close the program");
                 Console.ReadKey();
             }
             catch (Exception exc)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
                 if (exc is UnauthorizedAccessException)
                 {
-                    Console.WriteLine("The application is not authorized to save files to the provided location. Please start the application in administrator mode and try again.");
+                    MessageHelper.PrintMessage("The application is not authorized to save files to the provided location. Please start the application in administrator mode and try again.", "danger");
                 }
                 else
                 {
-                    Console.WriteLine(exc.Message);
+                    MessageHelper.PrintMessage(exc.Message, "danger");
                 }
                 Console.ReadKey();
             }

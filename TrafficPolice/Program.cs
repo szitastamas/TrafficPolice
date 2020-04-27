@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrafficPolice.Models;
+using TrafficPolice.Models.Helpers;
 
 namespace TrafficPolice
 {
@@ -16,11 +17,8 @@ namespace TrafficPolice
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the Traffic Police application!");
-            Console.WriteLine(@"Type in a location to save the result of the monitoring. The default location is C:\\DNS_Protocol.txt");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Note: saving the protocol file in the default location requires administrator rights.");
-            Console.ForegroundColor = ConsoleColor.White;
+            // Welcoming user with basic instructions
+            WelcomeUser();
             string location = "Invalid Location";
 
             do
@@ -34,6 +32,13 @@ namespace TrafficPolice
             police.ChooseDevice();
 
             Console.ReadKey();
+        }
+
+        private static void WelcomeUser()
+        {
+            MessageHelper.PrintMessage("Welcome to the Traffic Police application!");
+            MessageHelper.PrintMessage(@"Type in a location to save the result of the monitoring. The default location is C:\\DNS_Protocol.txt");
+            MessageHelper.PrintMessage("Note: saving the protocol file in the default location requires administrator rights.", "warning");
         }
     }
 }

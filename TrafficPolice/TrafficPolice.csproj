@@ -56,12 +56,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\IOHelper.cs" />
-    <Compile Include="Models\NetworkEvent.cs" />
-    <Compile Include="Models\Police.cs" />
-    <Compile Include="Models\Query.cs" />
-    <Compile Include="Models\QueryRepository.cs" />
-    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\Helpers\IOHelper.cs" />
+    <Compile Include="Models\Helpers\MessageHelper.cs" />
+    <Compile Include="Models\Traffic\NetworkEvent.cs" />
+    <Compile Include="Models\Traffic\Police.cs" />
+    <Compile Include="Models\Traffic\Query.cs" />
+    <Compile Include="Models\Traffic\QueryRepository.cs" />
+    <Compile Include="Models\Traffic\Response.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

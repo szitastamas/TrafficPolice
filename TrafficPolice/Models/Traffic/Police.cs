@@ -10,6 +10,7 @@ using PcapDotNet.Packets;
 using PcapDotNet.Packets.Dns;
 using PcapDotNet.Packets.IpV4;
 using PcapDotNet.Packets.Transport;
+using TrafficPolice.Models.Helpers;
 
 namespace TrafficPolice.Models
 {
@@ -38,23 +39,22 @@ namespace TrafficPolice.Models
             int deviceCounter = 1;
             foreach (var dev in Devices)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("OPTION - {0} -", deviceCounter);
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(dev.Name);
+                Console.WriteLine();
+                MessageHelper.PrintMessage($"OPTION -{deviceCounter}-", "warning");
+                MessageHelper.PrintMessage(dev.Name);
                 if (dev.Description != null)
                 {
-                    Console.WriteLine(dev.Description);
+                    MessageHelper.PrintMessage(dev.Description);
                 }
                 foreach (DeviceAddress address in dev.Addresses)
                 {
                     if (!address.Address.ToString().StartsWith("Internet6"))
                     {
 
-                        Console.WriteLine("Address: " + address.Address);
+                        MessageHelper.PrintMessage("Address: " + address.Address);
                         if (address.Destination != null)
                         {
-                            Console.WriteLine("Destination: " + address.Destination);
+                            MessageHelper.PrintMessage("Destination: " + address.Destination);
                         }
                         Console.WriteLine(address.Netmask);
                     }
@@ -65,7 +65,7 @@ namespace TrafficPolice.Models
             int deviceIndex = 0;
             do
             {
-                Console.WriteLine("Enter the interface number (1-" + Devices.Count + "):");
+                MessageHelper.PrintMessage("Enter the interface number (1-" + Devices.Count + "):");
                 string deviceIndexString = Console.ReadLine();
                 if (!int.TryParse(deviceIndexString, out deviceIndex) ||
                     deviceIndex < 1 || deviceIndex > Devices.Count)
@@ -90,7 +90,7 @@ namespace TrafficPolice.Models
             {
                 if (communicator.DataLink.Kind != DataLinkKind.Ethernet)
                 {
-                    Console.WriteLine("This program works only on Ethernet networks.");
+                    MessageHelper.PrintMessage("This program works only on Ethernet networks.");
                     return;
                 }
 
@@ -101,12 +101,10 @@ namespace TrafficPolice.Models
                     communicator.SetFilter(filter);
                 }
 
-                Console.WriteLine("Listening on " + selectedDevice.Description + "...");
+                MessageHelper.PrintMessage("Listening on " + selectedDevice.Description + "...");
 
                 // start the capture
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Monitoring started. Press any key to stop and save the results into a text file");
-                Console.ForegroundColor = ConsoleColor.White;
+                MessageHelper.PrintMessage("Monitoring started. Press any key to stop and save the results into a text file", "warning");
 
                 Packet packet;
                 do
@@ -144,13 +142,13 @@ namespace TrafficPolice.Models
                 {
                     Query query = new Query(dns.Id, ip.Source, ip.Destination, ip.Protocol, queries);
                     repo.Events.Add(query);
-                    Console.WriteLine(query.PrintOutQueryInfo());
+                    MessageHelper.PrintMessage(query.PrintOutQueryInfo());
                 }
                 else if (dns.IsResponse)
                 {
                     Response res = new Response(dns.Id, dns.ResponseCode, dns.DataResourceRecords, ip.Source, ip.Destination, ip.Protocol, queries);
                     repo.Events.Add(res);
-                    Console.WriteLine(res.PrintOutQueryInfo());
+                    MessageHelper.PrintMessage(res.PrintOutQueryInfo());
                 }
             }
         }
