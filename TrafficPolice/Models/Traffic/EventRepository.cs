@@ -11,29 +11,21 @@ namespace TrafficPolice.Models
     /// <summary>
     /// A centralized store for all the DNS Queries and Responses that occured. Its method saves the event infos into the file that has been provided by the user.
     /// </summary>
-    class QueryRepository
+    class EventRepository
     {
-       public List<NetworkEvent> Events { get; set; } = new List<NetworkEvent>();
+        public List<NetworkEvent> Events { get; set; } = new List<NetworkEvent>();
 
-        public void SaveMonitoringResultToTextFile(string fileLocation)
+        public void SaveMonitoringResultsToTextFile(string fileLocation)
         {
             try
             {
                 StreamWriter writer = new StreamWriter(fileLocation, true);
                 MessageHelper.PrintMessage("Saving results....");
 
-                Events.ForEach(e =>
+                foreach (NetworkEvent ev in Events)
                 {
-                    try
-                    {
-                        writer.WriteLine(e.PrintOutQueryInfo());
-                    }
-                    catch (Exception exc)
-                    {
-                        MessageHelper.PrintMessage(exc.Message, "danger");
-                        throw;
-                    }
-                });
+                    writer.WriteLine(ev.PrintOutQueryInfo());
+                }
 
                 MessageHelper.PrintMessage("Results successfully saved", "sucecss");
                 MessageHelper.PrintMessage("Press a key to close the program");

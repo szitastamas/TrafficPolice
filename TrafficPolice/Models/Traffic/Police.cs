@@ -18,7 +18,7 @@ namespace TrafficPolice.Models
     {
         public IList<LivePacketDevice> Devices { get; set; } = LivePacketDevice.AllLocalMachine;
 
-        QueryRepository repo = new QueryRepository();
+        EventRepository repo = new EventRepository();
 
         public string FileLocation { get; set; }
 
@@ -123,7 +123,7 @@ namespace TrafficPolice.Models
                     }
                 } while (!Console.KeyAvailable);
 
-                repo.SaveMonitoringResultToTextFile(FileLocation);
+                repo.SaveMonitoringResultsToTextFile(FileLocation);
                 
             }
         }

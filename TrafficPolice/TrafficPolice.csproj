@@ -61,7 +61,7 @@
     <Compile Include="Models\Traffic\NetworkEvent.cs" />
     <Compile Include="Models\Traffic\Police.cs" />
     <Compile Include="Models\Traffic\Query.cs" />
-    <Compile Include="Models\Traffic\QueryRepository.cs" />
+    <Compile Include="Models\Traffic\EventRepository.cs" />
     <Compile Include="Models\Traffic\Response.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
